@@ -24,7 +24,7 @@ export default function FooterBanner() {
                <div className={Style.footer_banner_link}>
                   <p>GET YOUR APP TODAY</p>
 
-                  <div>
+                  <div >
                      <img src={Image1} alt="appStore" />
                      <img src={Image2} alt="playStore" />
                   </div>

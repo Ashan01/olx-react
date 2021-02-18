@@ -29,13 +29,18 @@
    font-weight: 400;
 }
 
+.footer_banner_link {
+   margin-top: 30px;
+   margin-left: 30px;
+}
 .footer_banner_link p {
    font-size: 16px;
    line-height: 20px;
-   font-weight: 700;
-   padding: 50px 0 0 20px;
+   font-weight: 600;
+   margin-bottom: 20px;
 }
 .footer_banner_link img {
    width: auto;
    height: 40px;
+   padding-left: 3px;
 }
