@@ -11,9 +11,9 @@ import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 const useStyles = makeStyles((theme) => ({
    grow: {
@@ -134,10 +134,10 @@ export default function PrimarySearchAppBar() {
          <MenuItem>
             <IconButton aria-label="show 4 new mails" color="inherit">
                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
+                  <AddShoppingCartIcon />
                </Badge>
             </IconButton>
-            <p>Messages</p>
+            <p>Sell</p>
          </MenuItem>
          <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -191,11 +191,17 @@ export default function PrimarySearchAppBar() {
                </div>
                <div className={classes.grow} />
                <div className={classes.sectionDesktop}>
-                  <IconButton aria-label="show 4 new mails" color="inherit">
+                  {/* <IconButton aria-label="show 4 new mails" color="inherit">
                      <Badge badgeContent={4} color="secondary">
                         <MailIcon />
                      </Badge>
+                  </IconButton> */}
+                  <IconButton color="inherit" aria-label="add to shopping cart">
+                     <Badge badgeContent={4} color="secondary">
+                        <AddShoppingCartIcon />
+                     </Badge>
                   </IconButton>
+
                   <IconButton
                      aria-label="show 17 new notifications"
                      color="inherit"
