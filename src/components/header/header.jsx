@@ -14,6 +14,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
    grow: {
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Header() {
    const classes = useStyles();
    const [anchorEl, setAnchorEl] = React.useState(null);
    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -139,6 +140,7 @@ export default function PrimarySearchAppBar() {
             </IconButton>
             <p>Sell</p>
          </MenuItem>
+
          <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
                <Badge badgeContent={11} color="secondary">
@@ -191,17 +193,11 @@ export default function PrimarySearchAppBar() {
                </div>
                <div className={classes.grow} />
                <div className={classes.sectionDesktop}>
-                  {/* <IconButton aria-label="show 4 new mails" color="inherit">
-                     <Badge badgeContent={4} color="secondary">
-                        <MailIcon />
-                     </Badge>
-                  </IconButton> */}
                   <IconButton color="inherit" aria-label="add to shopping cart">
-                     <Badge badgeContent={4} color="secondary">
+                     <Link to="/sell">
                         <AddShoppingCartIcon />
-                     </Badge>
+                     </Link>
                   </IconButton>
-
                   <IconButton
                      aria-label="show 17 new notifications"
                      color="inherit"

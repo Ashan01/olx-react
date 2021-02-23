@@ -7,14 +7,15 @@ import Instagram from "../../assets/img/instagram-brands.svg";
 import Twitter from "../../assets/img/twitter-brands.svg";
 import AppStore from "../../assets/img/appstore.png";
 import playstore from "../../assets/img/playstore.png";
+import Hidden from "@material-ui/core/Hidden";
 
 export default function FooterLinks() {
    return (
       <footer className={Style.footer}>
          <Grid container>
-            <Grid xs={9} className={Style.FooterGrid}>
+            <Grid md={9} lg={9} xl={9} className={Style.FooterGrid}>
                <div className={Style.footer_li}>
-                  <span>Popular Category</span>
+                  <span>Category</span>
                   <ul>
                      <li>
                         <a href="#">Car</a>
@@ -31,7 +32,7 @@ export default function FooterLinks() {
                   </ul>
                </div>
                <div className={Style.footer_li}>
-                  <span>Trending Serches</span>
+                  <span>Serches</span>
                   <ul>
                      <li>
                         <a href={"#"}>Bike</a>
@@ -82,20 +83,22 @@ export default function FooterLinks() {
                   </ul>
                </div>
             </Grid>
-            <Grid xs={3} className={Style.footer_li_icons}>
-               <span> FOLLOW US </span>
-               <div>
-                  <img src={FbImage} width={30} height={30} alt="" />
-                  <img src={WhatsApp} width={30} height={30} alt="" />
-                  <img src={Instagram} width={30} height={30} alt="" />
-                  <img src={Twitter} height={30} alt="" />
-               </div>
+            <Grid md={3} lg={3} xl={3} className={Style.footer_li_icons}>
+               <Hidden only={["xs", "sm"]}>
+                  <span> FOLLOW US </span>
+                  <div>
+                     <img src={FbImage} width={30} height={30} alt="" />
+                     <img src={WhatsApp} width={30} height={30} alt="" />
+                     <img src={Instagram} width={30} height={30} alt="" />
+                     <img src={Twitter} height={30} alt="" />
+                  </div>
 
-               <div className={Style.row_1}>
-                  <img src={AppStore} width={94} height={26} alt="" />
+                  <div className={Style.row_1}>
+                     <img src={AppStore} width={94} height={26} alt="" />
 
-                  <img src={playstore} width={94} height={26} alt="" />
-               </div>
+                     <img src={playstore} width={94} height={26} alt="" />
+                  </div>
+               </Hidden>
             </Grid>
          </Grid>
       </footer>

@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 
 import { Formik, Form } from "formik";
 import * as yup from "yup";
+import firebase from "../Config/firebaseConfig";
 
 const useStyles = makeStyles((theme) => ({
    "@global": {
@@ -33,40 +34,77 @@ const useStyles = makeStyles((theme) => ({
    submit: {
       margin: theme.spacing(3, 0, 2),
    },
+   root: {
+      "& > *": {
+         margin: theme.spacing(1),
+      },
+   },
+   input: {
+      display: "none",
+   },
 }));
 
 let SignupSchema = yup.object().shape({
-   firstName: yup.string().required("This field is required."),
-   lastName: yup.string().required("This field is required."),
-   email: yup.string().email().required("This field is required."),
-   password: yup
-      .string()
-      .min(6, "Password is too short.")
-      .max(20, "Password is too long.")
-      .required("This field is required."),
+   title: yup.string().required("This field is required."),
+   desc: yup.string().required("This field is required."),
+   city: yup.string().required("This field is required."),
+   price: yup.string().required("This field is required."),
 });
 
 export default function SellForm() {
+   // let { firebase } = useContext(createFirebaseContext);
+   let files = [];
+
+   const handleImageChange = (e) => {
+      files = e.target.files;
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+   };
+
    const classes = useStyles();
 
    return (
       <Container component="main" maxWidth="xs">
          <CssBaseline />
          <div className={classes.paper}>
-            <Typography component="h1" variant="h3">
+            <Typography component="h1" variant="h4">
                POST YOUR AD
             </Typography>
 
             <Formik
                initialValues={{
-                  firstName: "",
-                  lastName: "",
-                  email: "",
-                  password: "",
+                  title: "",
+                  desc: "",
+                  price: "",
+                  city: "",
                }}
                validationSchema={SignupSchema}
                onSubmit={(values) => {
-                  console.log(values);
+                  console.log("Submit====>");
+                  let database = firebase.database().ref("sellIteam");
+                  var key = database.push().key;
+                  let inpPrice = values.price;
+                  let inpDesc = values.desc;
+                  let inpCity = values.city;
+
+                  var uploadTask = firebase
+                     .storage()
+                     .ref(`images1/imageName${key}.png`)
+                     .put(files[0]);
+
+                  uploadTask.on("state_changed", function () {
+                     uploadTask.snapshot.ref
+                        .getDownloadURL()
+                        .then(function (downlaodURL) {
+                           database.child(key).set({
+                              inpPrice_1: inpPrice,
+                              inpDesc_1: inpDesc,
+                              inpCity_1: inpCity,
+                              key,
+                              ImageUrl_1: downlaodURL,
+                           });
+                        });
+                  });
                }}
             >
                {({ errors, handleChange, touched }) => (
@@ -74,51 +112,52 @@ export default function SellForm() {
                      <Grid container spacing={2}>
                         <Grid item xs={12}>
                            <TextField
-                              error={errors.firstName && touched.firstName}
-                              autoComplete="fname"
-                              name="firstName"
+                              error={errors.title && touched.title}
+                              autoComplete="title"
+                              name="title"
                               variant="outlined"
                               fullWidth
                               onChange={handleChange}
-                              id="firstName"
+                              id="title"
                               label="Ad title *"
                               autoFocus
                               helperText={
-                                 errors.firstName && touched.firstName
-                                    ? errors.firstName
+                                 errors.title && touched.title
+                                    ? errors.title
                                     : null
                               }
                            />
                         </Grid>
                         <Grid item xs={12}>
                            <TextField
-                              error={errors.lastName && touched.lastName}
+                              error={errors.desc && touched.desc}
                               variant="outlined"
                               fullWidth
-                              onChange={handleChange}
-                              id="lastName"
+                              id="desc"
                               label="Description *"
-                              name="lastName"
-                              autoComplete="lname"
+                              name="desc"
+                              autoComplete="desc"
+                              onChange={handleChange}
                               helperText={
-                                 errors.lastName && touched.lastName
-                                    ? errors.lastName
+                                 errors.desc && touched.desc
+                                    ? errors.desc
                                     : null
                               }
                            />
                         </Grid>
                         <Grid item xs={12}>
                            <TextField
-                              error={errors.email && touched.email}
+                              error={errors.price && touched.price}
                               variant="outlined"
                               fullWidth
                               onChange={handleChange}
-                              id="email"
+                              type="number"
+                              id="price"
                               label="Set Prices *"
-                              name="email"
-                              autoComplete="email"
+                              name="price"
+                              autoComplete="price"
                               helperText={
-                                 errors.email && touched.email
+                                 errors.price && touched.price
                                     ? errors.email
                                     : null
                               }
@@ -126,24 +165,33 @@ export default function SellForm() {
                         </Grid>
                         <Grid item xs={12}>
                            <TextField
-                              error={errors.password && touched.password}
+                              error={errors.city && touched.city}
                               variant="outlined"
                               fullWidth
                               onChange={handleChange}
-                              name="password"
+                              name="city"
                               label="City *"
                               type="text"
-                              id="password"
-                              autoComplete="current-password"
+                              id="city"
+                              autoComplete="current-city"
                               helperText={
-                                 errors.password && touched.password
-                                    ? errors.password
+                                 errors.city && touched.city
+                                    ? errors.city
                                     : null
                               }
                            />
                         </Grid>
-                        <Grid>
-                            <h2>Upload Image</h2>
+
+                        <Grid item xs={12}>
+                           <h3>Upload Image</h3>
+                           <div>
+                              <input
+                                 type="file"
+                                 required
+                                 accept="image/*"
+                                 onChange={handleImageChange}
+                              />
+                           </div>
                         </Grid>
                      </Grid>
                      <Button
