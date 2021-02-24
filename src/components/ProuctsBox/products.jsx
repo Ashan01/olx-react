@@ -7,20 +7,12 @@ import firebase from "firebase/app";
 export default function ProductsListComponent() {
    let [firebaseData, setFirebaseData] = useState({});
    useEffect(() => {
-      // async function getData() {
-      //    try {
-      //       await
       firebase
          .database()
          .ref("sellIteam")
          .on("value", function (data) {
             setFirebaseData(data.val());
          });
-      //    } catch (error) {
-      //       console.log(error);
-      //    }
-      // }
-      // getData();
    }, []);
 
    return (

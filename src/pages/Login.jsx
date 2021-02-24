@@ -37,9 +37,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-let SignupSchema = yup.object().shape({
-   firstName: yup.string().required("This field is required."),
-   lastName: yup.string().required("This field is required."),
+let LoginSchema = yup.object().shape({
    email: yup.string().email().required("This field is required."),
    password: yup
       .string()
@@ -48,7 +46,7 @@ let SignupSchema = yup.object().shape({
       .required("This field is required."),
 });
 
-export default function SignUp() {
+export default function Login() {
    const classes = useStyles();
    let history = useHistory();
 
@@ -57,33 +55,29 @@ export default function SignUp() {
          <CssBaseline />
          <div className={classes.paper}>
             <Typography component="h1" variant="h3">
-               Sign up
+               Login
             </Typography>
 
             <Formik
                initialValues={{
-                  firstName: "",
-                  lastName: "",
                   email: "",
                   password: "",
                }}
-               validationSchema={SignupSchema}
+               validationSchema={LoginSchema}
                onSubmit={(values) => {
                   console.log("Submit===>");
                   firebase
                      .auth()
-                     .createUserWithEmailAndPassword(
-                        values.email,
-                        values.password
-                     )
+                     .signInWithEmailAndPassword(values.email, values.password)
                      .then((result) => {
                         console.log(result);
                      })
                      .catch((error) => {
                         var errorCode = error.code;
                         var errorMessage = error.message;
-                        console.log(errorMessage);
-                        console.log(errorCode);
+
+                        console.log("errorCode===>", errorCode);
+                        console.log("errorMessage===>", errorMessage);
                      });
 
                   history.push("/home");
@@ -92,41 +86,6 @@ export default function SignUp() {
                {({ errors, handleChange, touched }) => (
                   <Form className={classes.form}>
                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                           <TextField
-                              error={errors.firstName && touched.firstName}
-                              autoComplete="fname"
-                              name="firstName"
-                              variant="outlined"
-                              fullWidth
-                              onChange={handleChange}
-                              id="firstName"
-                              label="First Name"
-                              autoFocus
-                              helperText={
-                                 errors.firstName && touched.firstName
-                                    ? errors.firstName
-                                    : null
-                              }
-                           />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                           <TextField
-                              error={errors.lastName && touched.lastName}
-                              variant="outlined"
-                              fullWidth
-                              onChange={handleChange}
-                              id="lastName"
-                              label="Last Name"
-                              name="lastName"
-                              autoComplete="lname"
-                              helperText={
-                                 errors.lastName && touched.lastName
-                                    ? errors.lastName
-                                    : null
-                              }
-                           />
-                        </Grid>
                         <Grid item xs={12}>
                            <TextField
                               error={errors.email && touched.email}
@@ -172,7 +131,7 @@ export default function SignUp() {
                      >
                         Sign Up
                      </Button>
-                     <p>Already an account? {<Link to="/login">login</Link>}</p>
+                     <p>Do you have an account? {<Link to="/">SignUp</Link>}</p>
                   </Form>
                )}
             </Formik>

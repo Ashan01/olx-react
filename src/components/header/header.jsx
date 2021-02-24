@@ -132,14 +132,16 @@ export default function Header() {
          open={isMobileMenuOpen}
          onClose={handleMobileMenuClose}
       >
-         <MenuItem>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-               <Badge badgeContent={4} color="secondary">
-                  <AddShoppingCartIcon />
-               </Badge>
-            </IconButton>
-            <p>Sell</p>
-         </MenuItem>
+         <Link to="/sell">
+            <MenuItem>
+               <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                     <AddShoppingCartIcon />
+                  </Badge>
+               </IconButton>
+               <p>Sell</p>
+            </MenuItem>
+         </Link>
 
          <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -165,7 +167,7 @@ export default function Header() {
 
    return (
       <div className={classes.grow}>
-         <AppBar position="static">
+         <AppBar position="static" color="transparent">
             <Toolbar>
                <IconButton
                   edge="start"
@@ -193,11 +195,15 @@ export default function Header() {
                </div>
                <div className={classes.grow} />
                <div className={classes.sectionDesktop}>
-                  <IconButton color="inherit" aria-label="add to shopping cart">
-                     <Link to="/sell">
+                  <Link to="/sell">
+                     <IconButton
+                        color="inherit"
+                        aria-label="add to shopping cart"
+                     >
                         <AddShoppingCartIcon />
-                     </Link>
-                  </IconButton>
+                     </IconButton>
+                  </Link>
+
                   <IconButton
                      aria-label="show 17 new notifications"
                      color="inherit"
