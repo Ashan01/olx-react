@@ -11,6 +11,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
+import "firebase/auth";
 
 const useStyles = makeStyles((theme) => ({
    "@global": {
