@@ -1,0 +1,41 @@
+.mainDiv {
+   margin: 20px;
+}
+.imageContainer {
+   height: 300px;
+   border: 1px solid gainsboro;
+   margin: 5px;
+   border-radius: 5px;
+}
+.imageContainer img {
+   display: flex;
+   align-items: center;
+   height: 300px;
+}
+.price {
+   /* width: 350px; */
+   height: 100px;
+   border: 1px solid gainsboro;
+   margin: 5px;
+   border-radius: 5px;
+}
+.SellerDesc {
+   height: 150px;
+   border: 1px solid black;
+   margin: 5px;
+   border-radius: 5px;
+}
+.details {
+   /* width: 800px; */
+   height: 100px;
+   border: 1px solid gainsboro;
+   margin: 5px;
+   border-radius: 5px;
+}
+.description {
+   /* width: 800px; */
+   height: 300px;
+   border: 1px solid gainsboro;
+   margin: 5px;
+   border-radius: 5px;
+}

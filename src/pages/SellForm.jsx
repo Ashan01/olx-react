@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import firebase from "../Config/firebaseConfig";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
    "@global": {
@@ -52,7 +53,6 @@ let SignupSchema = yup.object().shape({
 });
 
 export default function SellForm() {
-   // let { firebase } = useContext(createFirebaseContext);
    let files = [];
 
    const handleImageChange = (e) => {
@@ -62,7 +62,7 @@ export default function SellForm() {
    };
 
    const classes = useStyles();
-
+   let errorMessage;
    return (
       <Container component="main" maxWidth="xs">
          <CssBaseline />
@@ -79,32 +79,47 @@ export default function SellForm() {
                   city: "",
                }}
                validationSchema={SignupSchema}
-               onSubmit={(values) => {
-                  console.log("Submit====>");
-                  let database = firebase.database().ref("sellIteam");
-                  var key = database.push().key;
-                  let inpPrice = values.price;
-                  let inpDesc = values.desc;
-                  let inpCity = values.city;
+               onSubmit={(values, { resetForm }) => {
+                  try {
+                     let database = firebase.database().ref("sellIteam");
+                     var key = database.push().key;
+                     let inpPrice = values.price;
+                     let inpDesc = values.desc;
+                     let inpCity = values.city;
 
-                  var uploadTask = firebase
-                     .storage()
-                     .ref(`images1/imageName${key}.png`)
-                     .put(files[0]);
+                     var uploadTask = firebase
+                        .storage()
+                        .ref(`images1/imageName${key}.png`)
+                        .put(files[0]);
 
-                  uploadTask.on("state_changed", function () {
-                     uploadTask.snapshot.ref
-                        .getDownloadURL()
-                        .then(function (downlaodURL) {
-                           database.child(key).set({
-                              inpPrice_1: inpPrice,
-                              inpDesc_1: inpDesc,
-                              inpCity_1: inpCity,
-                              key,
-                              ImageUrl_1: downlaodURL,
+                     uploadTask.on("state_changed", function () {
+                        uploadTask.snapshot.ref
+                           .getDownloadURL()
+                           .then(function (downlaodURL) {
+                              database.child(key).set({
+                                 inpPrice_1: inpPrice,
+                                 inpDesc_1: inpDesc,
+                                 inpCity_1: inpCity,
+                                 key,
+                                 ImageUrl_1: downlaodURL,
+                              });
                            });
-                        });
-                  });
+                     });
+                  } catch (error) {
+                     errorMessage = error.message;
+                  }
+                  if (errorMessage) {
+                     return Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: errorMessage,
+                     });
+                  } else {
+                     Swal.fire({
+                        icon: "success",
+                        title: "Done",
+                     });
+                  }
                }}
             >
                {({ errors, handleChange, touched }) => (

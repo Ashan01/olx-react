@@ -1,7 +1,9 @@
 .mainDiv {
    margin-top: 50px;
 }
-
+.link {
+   text-decoration: none;
+}
 h1 {
    font-weight: 300;
    margin-left: 26px;

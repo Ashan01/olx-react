@@ -12,6 +12,7 @@ import * as yup from "yup";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 import "firebase/auth";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
    "@global": {
@@ -52,7 +53,7 @@ let SignupSchema = yup.object().shape({
 export default function SignUp() {
    const classes = useStyles();
    let history = useHistory();
-
+   var errorMessage;
    return (
       <Container component="main" maxWidth="xs">
          <CssBaseline />
@@ -69,9 +70,9 @@ export default function SignUp() {
                   password: "",
                }}
                validationSchema={SignupSchema}
-               onSubmit={(values) => {
+               onSubmit={async (values) => {
                   console.log("Submit===>");
-                  firebase
+                  await firebase
                      .auth()
                      .createUserWithEmailAndPassword(
                         values.email,
@@ -82,12 +83,24 @@ export default function SignUp() {
                      })
                      .catch((error) => {
                         var errorCode = error.code;
-                        var errorMessage = error.message;
-                        console.log(errorMessage);
+                        errorMessage = error.message;
                         console.log(errorCode);
                      });
 
-                  history.push("/home");
+                  if (errorMessage) {
+                     return Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: errorMessage,
+                     });
+                  } else {
+                     Swal.fire({
+                        icon: "success",
+                        title: "Sucess",
+                        text: "Sucessfully SignUp",
+                     });
+                     history.push("/home");
+                  }
                }}
             >
                {({ errors, handleChange, touched }) => (

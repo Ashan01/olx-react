@@ -11,6 +11,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
    "@global": {
@@ -49,7 +50,7 @@ let LoginSchema = yup.object().shape({
 export default function Login() {
    const classes = useStyles();
    let history = useHistory();
-
+   let errorMessage;
    return (
       <Container component="main" maxWidth="xs">
          <CssBaseline />
@@ -64,9 +65,9 @@ export default function Login() {
                   password: "",
                }}
                validationSchema={LoginSchema}
-               onSubmit={(values) => {
+               onSubmit={async (values) => {
                   console.log("Submit===>");
-                  firebase
+                  await firebase
                      .auth()
                      .signInWithEmailAndPassword(values.email, values.password)
                      .then((result) => {
@@ -74,13 +75,26 @@ export default function Login() {
                      })
                      .catch((error) => {
                         var errorCode = error.code;
-                        var errorMessage = error.message;
+                        errorMessage = error.message;
 
                         console.log("errorCode===>", errorCode);
                         console.log("errorMessage===>", errorMessage);
                      });
 
-                  history.push("/home");
+                  if (errorMessage) {
+                     return Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: errorMessage,
+                     });
+                  } else {
+                     Swal.fire({
+                        icon: "success",
+                        title: "Done...",
+                        text: "Sucessfully Login",
+                     });
+                     history.push("/home");
+                  }
                }}
             >
                {({ errors, handleChange, touched }) => (
