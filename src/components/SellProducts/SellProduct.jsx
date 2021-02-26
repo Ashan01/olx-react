@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Style from "./SellProduct.module.css";
 import firebase from "firebase/app";
 import { useParams } from "react-router-dom";
+import Hidden from "@material-ui/core/Hidden";
 
 export default function SellProducts() {
    let { id } = useParams();
@@ -30,19 +31,21 @@ export default function SellProducts() {
    return (
       <div className={Style.mainDiv}>
          <Grid container spacing={3}>
-            <Grid item xs={9}>
+            <Grid item xs={12} sm={12} md={9} lg={9} xl={9}>
                <div className={Style.imageContainer}>
                   <img src={firebaseData[id].ImageUrl_1} alt="productImage" />
                </div>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                <div className={Style.price}>
                   <span>Rs: {firebaseData[id].inpPrice_1}</span>
                </div>
-               <div className={Style.SellerDesc}></div>
+               <Hidden smDown>
+                  <div className={Style.SellerDesc}></div>
+               </Hidden>
             </Grid>
          </Grid>
-         <Grid xs={9}>
+         <Grid xs={12} sm={12} md={9} lg={9} xl={9}>
             <div className={Style.details}>
                <h3>
                   <span>Details</span>
@@ -55,7 +58,7 @@ export default function SellProducts() {
                </div>
             </div>
          </Grid>
-         <Grid xs={9}>
+         <Grid xs={12} sm={12} md={9} lg={9} xl={9}>
             <div className={Style.description}>
                <h3>
                   <span>Description</span>

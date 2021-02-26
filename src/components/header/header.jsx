@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
          display: "block",
       },
    },
+   link: {
+      textDecoration: "none",
+      color: "rgba(0, 0, 0, 0.87)",
+   },
    search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
@@ -132,7 +136,7 @@ export default function Header() {
          open={isMobileMenuOpen}
          onClose={handleMobileMenuClose}
       >
-         <Link to="/sell">
+         <Link to="/sell" className={classes.link}>
             <MenuItem>
                <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
@@ -143,25 +147,32 @@ export default function Header() {
             </MenuItem>
          </Link>
 
-         <MenuItem>
-            <IconButton aria-label="show 11 new notifications" color="inherit">
-               <Badge badgeContent={11} color="secondary">
-                  <NotificationsIcon />
-               </Badge>
-            </IconButton>
-            <p>Notifications</p>
-         </MenuItem>
-         <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-               aria-label="account of current user"
-               aria-controls="primary-search-account-menu"
-               aria-haspopup="true"
-               color="inherit"
-            >
-               <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
-         </MenuItem>
+         <Link to="/notification" className={classes.link}>
+            <MenuItem>
+               <IconButton
+                  aria-label="show 11 new notifications"
+                  color="inherit"
+               >
+                  <Badge badgeContent={11} color="secondary">
+                     <NotificationsIcon />
+                  </Badge>
+               </IconButton>
+               <p>Notifications</p>
+            </MenuItem>
+         </Link>
+         <Link to="/myAccount" className={classes.link}>
+            <MenuItem onClick={handleProfileMenuOpen}>
+               <IconButton
+                  aria-label="account of current user"
+                  aria-controls="primary-search-account-menu"
+                  aria-haspopup="true"
+                  color="inherit"
+               >
+                  <AccountCircle />
+               </IconButton>
+               <p>Profile</p>
+            </MenuItem>
+         </Link>
       </Menu>
    );
 
@@ -195,7 +206,7 @@ export default function Header() {
                </div>
                <div className={classes.grow} />
                <div className={classes.sectionDesktop}>
-                  <Link to="/sell">
+                  <Link to="/sell" className={classes.link}>
                      <IconButton
                         color="inherit"
                         aria-label="add to shopping cart"
@@ -204,24 +215,29 @@ export default function Header() {
                      </IconButton>
                   </Link>
 
-                  <IconButton
-                     aria-label="show 17 new notifications"
-                     color="inherit"
-                  >
-                     <Badge badgeContent={17} color="secondary">
-                        <NotificationsIcon />
-                     </Badge>
-                  </IconButton>
-                  <IconButton
-                     edge="end"
-                     aria-label="account of current user"
-                     aria-controls={menuId}
-                     aria-haspopup="true"
-                     onClick={handleProfileMenuOpen}
-                     color="inherit"
-                  >
-                     <AccountCircle />
-                  </IconButton>
+                  <Link to="/notification" className={classes.link}>
+                     <IconButton
+                        aria-label="show 17 new notifications"
+                        color="inherit"
+                     >
+                        <Badge badgeContent={17} color="secondary">
+                           <NotificationsIcon />
+                        </Badge>
+                     </IconButton>
+                  </Link>
+
+                  <Link to="/myAccount" className={classes.link}>
+                     <IconButton
+                        edge="end"
+                        aria-label="account of current user"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleProfileMenuOpen}
+                        color="inherit"
+                     >
+                        <AccountCircle />
+                     </IconButton>
+                  </Link>
                </div>
                <div className={classes.sectionMobile}>
                   <IconButton
