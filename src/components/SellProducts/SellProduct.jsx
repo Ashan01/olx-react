@@ -23,7 +23,7 @@ export default function SellProducts() {
       }
    }, []);
 
-   // console.log(firebaseData[id]);
+   console.log(firebaseData[id]);
    if (!firebaseData[id]) {
       return <h1>loading.....</h1>;
    }
@@ -32,21 +32,35 @@ export default function SellProducts() {
          <Grid container spacing={3}>
             <Grid item xs={9}>
                <div className={Style.imageContainer}>
-                  <img src={firebaseData.id.ImageUrl_1} alt="productImage" />
+                  <img src={firebaseData[id].ImageUrl_1} alt="productImage" />
                </div>
             </Grid>
             <Grid item xs={3}>
                <div className={Style.price}>
-                  {/* <h1>RS: {firebaseData[id]}</h1> */}
+                  <span>Rs: {firebaseData[id].inpPrice_1}</span>
                </div>
                <div className={Style.SellerDesc}></div>
             </Grid>
          </Grid>
          <Grid xs={9}>
-            <div className={Style.details}></div>
+            <div className={Style.details}>
+               <h3>
+                  <span>Details</span>
+               </h3>
+               <div>
+                  <span className={Style.span_1}>Condition</span>
+                  <span className={Style.span_2}>Used</span>
+                  <span className={Style.span_1}>Type</span>
+                  <span className={Style.span_2}>none</span>
+               </div>
+            </div>
          </Grid>
          <Grid xs={9}>
-            <div className={Style.description}></div>
+            <div className={Style.description}>
+               <h3>
+                  <span>Description</span>
+               </h3>
+            </div>
          </Grid>
       </div>
    );

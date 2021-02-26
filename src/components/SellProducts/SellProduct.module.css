@@ -6,11 +6,14 @@
    border: 1px solid gainsboro;
    margin: 5px;
    border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   background-color: black;
+   box-sizing: border-box;
 }
 .imageContainer img {
-   display: flex;
-   align-items: center;
-   height: 300px;
+   width: 400px;
+   height: 298px;
 }
 .price {
    /* width: 350px; */
@@ -19,23 +22,74 @@
    margin: 5px;
    border-radius: 5px;
 }
+.price span {
+   direction: ltr;
+   font-weight: 700;
+   margin-bottom: 8px;
+   color: #002f34;
+   font-size: 34px;
+   line-height: 32px;
+   font-style: normal;
+   font-stretch: normal;
+}
+
+.price:hover {
+   border: 2px solid black;
+}
 .SellerDesc {
    height: 150px;
    border: 1px solid black;
    margin: 5px;
    border-radius: 5px;
 }
+.SellerDesc:hover {
+   border: 2px solid black;
+}
 .details {
-   /* width: 800px; */
    height: 100px;
    border: 1px solid gainsboro;
-   margin: 5px;
    border-radius: 5px;
+   padding: 10px;
+}
+.details div {
+   max-width: 80%;
+   margin-top: 20px;
+   display: flex;
+   justify-content: space-between;
+}
+.details .span_1 {
+   color: rgba(0, 47, 52, 0.64);
+   font-weight: 400;
+   font-style: normal;
+   font-stretch: normal;
+   font-size: 16px;
+   line-height: 20px;
+}
+.details .span2 {
+   color: #002f34;
+
+   font-weight: 400;
+   font-style: normal;
+   font-stretch: normal;
+   font-size: 14px;
+   line-height: 20px;
+}
+.details:hover {
+   border: 2px solid black;
+}
+.details h3 span,
+.description h3 span {
+   font-weight: 700;
+   font-size: 20px;
+   color: #002f34;
 }
 .description {
-   /* width: 800px; */
    height: 300px;
    border: 1px solid gainsboro;
    margin: 5px;
    border-radius: 5px;
+   padding: 10px;
+}
+.description:hover {
+   border: 2px solid black;
 }
