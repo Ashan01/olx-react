@@ -1,0 +1,3 @@
+[build]
+  build = "yarn build"
+  publish = "build/"

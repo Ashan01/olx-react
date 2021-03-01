@@ -24,7 +24,6 @@ export default function SellProducts() {
       }
    }, []);
 
-   console.log(firebaseData[id]);
    if (!firebaseData[id]) {
       return <h1>loading.....</h1>;
    }
@@ -38,10 +37,17 @@ export default function SellProducts() {
             </Grid>
             <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                <div className={Style.price}>
-                  <span>Rs: {firebaseData[id].inpPrice_1}</span>
+                  <span className={Style.span_3}>
+                     Rs: {firebaseData[id].inpPrice_1}
+                  </span>
+                  <div className={Style.span_4}>
+                     {firebaseData[id].inpCity_1}
+                  </div>
                </div>
                <Hidden smDown>
-                  <div className={Style.SellerDesc}></div>
+                  <div className={Style.SellerDesc}>
+                     <span>Seller description</span>
+                  </div>
                </Hidden>
             </Grid>
          </Grid>
@@ -63,6 +69,7 @@ export default function SellProducts() {
                <h3>
                   <span>Description</span>
                </h3>
+               <p>{firebaseData[id].inpDesc_1}</p>
             </div>
          </Grid>
       </div>

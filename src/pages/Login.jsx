@@ -143,7 +143,7 @@ export default function Login() {
                         color="primary"
                         className={classes.submit}
                      >
-                        Sign Up
+                        Login
                      </Button>
                      <p>Do you have an account? {<Link to="/">SignUp</Link>}</p>
                   </Form>
